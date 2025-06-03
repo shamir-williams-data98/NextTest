@@ -10,8 +10,7 @@ This project implements a basic ETL (Extract, Transform, Load) pipeline for tran
 
 I went with SQLite for this project for a few key reasons:
 
-1.
-Serverless & Self contained - No need to run a separate server process. For a technical test like this, setting up a full database server would've been an overkill.
+1. Serverless & Self contained - No need to run a separate server process. For a technical test like this, setting up a full database server would've been an overkill.
 
 2. Zero Configuration - Just works out of the box. The database is a single file I can easily back up or share.
 
@@ -37,6 +36,41 @@ I chose Python for this pipeline because:
 
 The database consists of two tables: companies and raw_transactions with the following structure:
 
+
+
+![Database ER diagram (crow's foot)](https://github.com/user-attachments/assets/bc236156-ef1e-456a-92d3-d45e312f0243)
+
+**Data Storage Formats**
+
+**SQLite Database**
+
+The primary storage for processed transaction data is SQLite, as described above.
+
+**Parquet Files**
+
+In addition to SQLite, this project uses Parquet files for intermediate data storage and analytics:
+
+1. Columnar Storage - Parquet's columnar format allows for efficient querying of specific fields, perfect for analytics on transaction data.
+
+2. Compression Efficiency - Parquet achieves better compression ratios than row-based formats, reducing storage costs for large transaction volumes.
+
+3. Schema Evolution - As the transaction data model evolves, Parquet handles schema changes gracefully.
+
+4. Integration with Analytics Tools - Parquet files can be directly loaded into analytics platforms like Spark, Dask, or Pandas for advanced reporting.
+
+5. Data Partitioning - Transaction data is partitioned by date in Parquet files, enabling faster queries for specific time periods.
+
+The pipeline stores raw transaction data in Parquet format before loading into SQLite, providing both operational database access and analytical capabilities.
+
+**Project Structure**
+
+• database_setup.py - Creates the SQLite database and defines the schema
+
+• data_extraction.py - Handles extraction of raw transaction data
+
+• data_transformation.py - Processes and transforms the extracted data into Parquet format
+
+• pipeline_runner.py - Orchestrates the ETL pipeline execution
 
 
 
