@@ -37,8 +37,8 @@ I chose Python for this pipeline because:
 The database consists of two tables: companies and raw_transactions with the following structure:
 
 
+![Database ER diagram (crow's foot) (1)](https://github.com/user-attachments/assets/03796bc1-0af2-4ac0-af97-e89abb761c84)
 
-![Database ER diagram (crow's foot)](https://github.com/user-attachments/assets/bc236156-ef1e-456a-92d3-d45e312f0243)
 
 **Data Storage Formats**
 
